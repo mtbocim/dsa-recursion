@@ -80,9 +80,10 @@ function findIndex(arr, val) {
    // return -1;
    //console.log("what is arr?", arr)
    if (arr.length === 0) return -1;
-   if (arr[0]=== val) return 0;
-   //return arr[arr.length - 1] === val ? arr.length - 1 : findIndex(arr.slice(0, -1), val);
-   return findIndex(arr.slice(1), val) !== -1? 1+findIndex(arr.slice(1), val):-1;
+   if (arr[0] === val) return 0;
+   return findIndex(arr.slice(1), val) !== -1
+      ? 1 + findIndex(arr.slice(1), val)
+      : -1;
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
