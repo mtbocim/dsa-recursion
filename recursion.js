@@ -160,23 +160,7 @@ function binarySearchIndex(arr, val) {
          return -1;
       }
    }
-
-   // let result = val < arr[middleIdx] 
-   //                ? binarySearch(firstHalf, val) 
-   //                : binarySearch(secondHalf, val);
-   // console.log(result, "<---------------------- result")
-
-   // return result !== -1
-   //        ? result
-   //        : -1; 
 }
-
-
-// if (arr.length === 0) return -1;
-// if (arr[0] === val) return 0;
-// return findIndex(arr.slice(1), val) !== -1
-//    ? 1 + findIndex(arr.slice(1), val)
-//    : -1;
 
 // you might find the above two problems easier if you change the function signature to:
 //
