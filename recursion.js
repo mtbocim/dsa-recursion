@@ -1,3 +1,5 @@
+"use strict";
+
 /** product: calculate the product of an array of numbers. */
 
 function product(nums) {
@@ -22,10 +24,12 @@ function longest(words) {
    // }
    // return longestW;
    if (words.length === 0) return 0;
-   return words[0].length > longest(words.slice(1))
+
+   let longestW = longest(words.slice(1));
+   return words[0].length > longestW
       ? words[0].length
-      : longest(words.slice(1));
-}
+      : longestW;
+} 
 
 /** everyOther: return a string with every other letter. */
 
@@ -36,7 +40,6 @@ function everyOther(str) {
    // }
    // return everyOtherLetter;
    if (str.length === 0) return '';
-   if (str.length === 1) return str[0];
    return str[0] + everyOther(str.slice(2));
 }
 
@@ -44,19 +47,18 @@ function everyOther(str) {
 
 function find(arr, val) {
    if (arr.length === 0) return false;
-   return arr[0] === val ? true : find(arr.slice(1), val);
-}
+   if(arr[0] === val) return true;
+   else return find(arr.slice(1), val);
+} 
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
 function isPalindrome(str) {
-   if (str.length === 0) return true;
-   if (str.length === 1) return true;
-   if (str.length > 1) {
-      if (str[0] !== str[str.length - 1]) return false;
-      return isPalindrome(str.slice(1, -1));
-   }
-}
+   if (str.length < 2) return true;
+   if (str[0] !== str[str.length - 1]) return false;
+   return isPalindrome(str.slice(1, -1));
+
+} //Consolidate 54 & 55 and wont need if code block
 
 /** revString: return a copy of a string, but in reverse. */
 
@@ -89,7 +91,18 @@ function findIndex(arr, val) {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
+   let output = [];
 
+   for(let item in obj){
+      if(typeof obj[item] === "object"){
+         output = output.concat(gatherStrings(obj[item]));
+      } else {
+         if (typeof obj[item] === "string"){
+            output.push(obj[item])
+         }
+      }
+   }
+   return output;
 }
 
 // FURTHER STUDY
@@ -98,7 +111,20 @@ function gatherStrings(obj) {
  * return true if val is in array, false if not present). */
 
 function binarySearch(arr, val) {
+   //BASE CASE: empty array, return false
+   if(arr.length < 2 && arr[0] !== val) return false;
 
+   let middleIdx = Math.floor(arr.length/2);
+   const firstHalf = arr.slice(0,middleIdx);
+   const secondHalf = arr.slice(middleIdx);
+
+   if(arr[middleIdx] === val){
+      return true;
+   }
+
+   return val < arr[middleIdx] 
+          ? binarySearch(firstHalf, val) 
+          : binarySearch(secondHalf, val);
 }
 
 
