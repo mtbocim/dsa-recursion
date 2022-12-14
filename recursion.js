@@ -132,26 +132,30 @@ function binarySearch(arr, val) {
  * return the index of that value (or -1 if val is not present). */
 
 function binarySearchIndex(arr, val) {
-   console.log(arr, "<================== array", val)
-   //Base Case
-   if(arr.length < 2 && arr[0] !== val) return -1;
 
+   //BASE CASE
+   if(arr.length < 2 && arr[0] !== val) return -1;
+   if(arr[0] === val){
+      return 0;
+   }
    let middleIdx = Math.floor(arr.length/2);
    const firstHalf = arr.slice(0,middleIdx);
    const secondHalf = arr.slice(middleIdx);
 
-   if(arr[0] === val){
-      return 0;
-   }
-
-
+   /**
+    * If val is lower than the value at index, recurse into itself with firstHalf array and val
+    *    If result of recursive function is -1, pass up -1. Else, add 1
+    * If higher than the value at index, recurse into itself with secondHalf array and val
+    *    If result of recursive function is -1, pass up -1. Else add middleIdx 
+    *       middleIdx represents the position on the array we have traversed.
+    */
    if (val < arr[middleIdx]){
       let result = binarySearchIndex(firstHalf, val);
       if(result !== -1){
          return 1 + result;
       }else {
          return -1;
-      }
+      } //Maybe ternary
    }else {
       let result = binarySearchIndex(secondHalf,val);
       if(result !== -1){
